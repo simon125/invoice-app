@@ -15,6 +15,7 @@ const StyledSidebarContainer = styled.div`
   justify-content: space-between;
   border-radius: 0 20px 20px 0;
   position: fixed;
+  z-index: 100;
   top: 0;
   bottom: 0;
   left: 0;

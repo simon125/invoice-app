@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import themeReducer from "style/slice";
+import formDrawerReducer from "pages/InvoiceForm/state/formDrawer";
 import { api } from "./api";
 
 export const store = configureStore({
   reducer: {
+    formDrawer: formDrawerReducer,
     theme: themeReducer,
     [api.reducerPath]: api.reducer,
   },

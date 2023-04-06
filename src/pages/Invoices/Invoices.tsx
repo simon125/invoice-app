@@ -2,9 +2,10 @@ import { FC } from "react";
 import { useGetInvoicesQuery } from "./api/useInvoicesQuery";
 import { InvoiceFilters } from "./components/InvoiceFiters/InvoiceFilters";
 import { InvoicesList } from "./components/InvoicesList/InvoicesList";
-import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import { Button } from "components/Button/Button";
+import { InvoiceForm } from "pages/InvoiceForm/InvoiceForm";
+import { useFormDrawer } from "pages/InvoiceForm/hooks/useFormDrawer";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -42,9 +43,10 @@ const StyledSubHeading = styled.p`
 
 export const Invoices: FC = () => {
   const { data: invoices } = useGetInvoicesQuery();
+  const { toggleFormDrawer } = useFormDrawer();
 
   return (
-    <div>
+    <>
       <StyledHeader>
         <div>
           <StyledHeading>Invoices</StyledHeading>
@@ -54,10 +56,15 @@ export const Invoices: FC = () => {
         </div>
         <div className="controls-container">
           <InvoiceFilters />
-          <StyledButton icon="plusCircle">New Invoice</StyledButton>
+          <StyledButton icon="plusCircle" onClick={toggleFormDrawer}>
+            New Invoice
+          </StyledButton>
         </div>
       </StyledHeader>
+
       <InvoicesList />
-    </div>
+
+      <InvoiceForm />
+    </>
   );
 };

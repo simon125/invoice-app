@@ -1,26 +1,36 @@
 import React, { FC } from "react";
 import { Grid } from "react-loader-spinner";
+import styled from "@emotion/styled";
+import { motion, Variants } from "framer-motion";
 
-export const Loader: FC = () => {
+const StyledContainer = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 20vh;
+`;
+
+const variants: Variants = {
+  initial: {},
+  animate: {},
+  exit: {},
+};
+
+interface LoaderProps {
+  className?: string;
+}
+
+export const Loader: FC<LoaderProps> = ({ className }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "20vh",
-      }}
-    >
+    <StyledContainer className={className} variants={variants}>
       <Grid
         height="80"
         width="80"
         color="#7C5DFA"
         ariaLabel="grid-loading"
         radius="12.5"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
+        visible
       />
-    </div>
+    </StyledContainer>
   );
 };

@@ -19,8 +19,8 @@ export const BUTTON_VARIANTS = (
     light: {
       color: isDarkTheme(theme) ? "#DFE3FA" : "#7E88C3",
       hoverColor: isDarkTheme(theme) ? "#252945" : "#7E88C3",
-      backgroundColor: isDarkTheme(theme) ? "#252945" : "#F9FAFE",
-      hoverBackgroundColor: isDarkTheme(theme) ? "#F2F2F2" : "#DFE3FA",
+      backgroundColor: isDarkTheme(theme) ? "#252945" : "#e5e6ec",
+      hoverBackgroundColor: isDarkTheme(theme) ? "#F2F2F2" : "#d9dcf1",
     },
     red: {
       color: "#FFFFFF",

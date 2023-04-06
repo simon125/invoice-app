@@ -3,6 +3,7 @@ import { useGetInvoicesQuery } from "../../api/useInvoicesQuery";
 import { InvoiceListItem } from "../InvoiceListItem/InvoiceListItem";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loader } from "components/Loader/Loader";
+import { InvoicesEmptyState } from "../InvoicesEmptyState/InvoicesEmptyState";
 
 const container = {
   hidden: { opacity: 0, y: 40, scale: 0.97 },
@@ -19,32 +20,36 @@ const container = {
 };
 
 export const InvoicesList: FC = () => {
-  const { isLoading, data: invoices } = useGetInvoicesQuery();
-
-  if (isLoading) {
-    return <Loader />;
-  }
+  const { isSuccess, isLoading, data: invoices } = useGetInvoicesQuery();
 
   return (
     <AnimatePresence>
-      {invoices?.map((invoice, index) => {
-        return (
-          <motion.div
-            key={invoice.id}
-            layout
-            variants={container}
-            initial="hidden"
-            animate="visible"
-            exit="out"
-            transition={{
-              delay: index * 0.05,
-              type: "just",
-            }}
-          >
-            <InvoiceListItem invoice={invoice} />
-          </motion.div>
-        );
-      })}
+      {isLoading && <Loader />}
+      {isSuccess && invoices.length === 0 && <InvoicesEmptyState />}
+      {isSuccess &&
+        invoices?.map((invoice, index) => {
+          return (
+            <motion.div
+              key={invoice.id}
+              layout
+              variants={container}
+              initial="hidden"
+              animate="visible"
+              exit="out"
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{ scale: 0.98 }}
+              transition={{
+                delay: index * 0.05,
+                type: "just",
+              }}
+            >
+              <InvoiceListItem invoice={invoice} />
+            </motion.div>
+          );
+        })}
     </AnimatePresence>
   );
 };
